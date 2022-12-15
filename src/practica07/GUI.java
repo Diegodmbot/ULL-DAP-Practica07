@@ -12,7 +12,6 @@ public class GUI {
     private JFrame frame;
     private JPanel mainPanel;
     private JLabel infoLabel;
-    private JLabel[] playerLabel;
     private JButton botonActualizar;
     private Observer observer;
 
@@ -24,34 +23,20 @@ public class GUI {
         botonActualizar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                //observer.update();
             }
         });
         observer = new Observer(this);
-        playerLabel = new JLabel[observer.getArrSize()];
-        ArrayList<Player> players = observer.getPlayers();
-        for (int i = 0; i < observer.getArrSize(); i++) {
-            playerLabel[i] = new JLabel("<html><body>" +
-                    players.get(i).toString() + "<br>" +
-                    players.get(i).getNumberOfGoals()
-                    + "</body></html>");
-            URL url = new URL(players.get(i).getFlagUrl());
-            Image icon = new ImageIcon(url).getImage();
-            icon = icon.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-            playerLabel[i].setIcon(new ImageIcon(icon));
-        }
 
         GridBagConstraints mainPanelConstraints = new GridBagConstraints();
         mainPanel.add(infoLabel, mainPanelConstraints);
         mainPanelConstraints.gridy = 1;
-        for (JLabel label : playerLabel) {
-            mainPanel.add(label, mainPanelConstraints);
-            mainPanelConstraints.gridy++;
-        }
+        mainPanel.add(observer.getRanking(), mainPanelConstraints);
+        mainPanelConstraints.gridy = 2;
         mainPanel.add(botonActualizar, mainPanelConstraints);
 
         frame.add(mainPanel);
-        frame.setSize(1280,720);
+        frame.setSize(500,720);
         frame.setResizable(true);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -1,7 +1,7 @@
 package practica07;
 
 public class Player {
-    private String name;
+    private final String name;
     protected String team;
     protected String flagUrl;
     protected int numberOfGoals;
@@ -12,12 +12,7 @@ public class Player {
         this.flagUrl = teamUrl;
         this.numberOfGoals = goals;
     }
-    public String getName() {
-        return name;
-    }
-    public String getTeam() {
-        return team;
-    }
+
     public String getFlagUrl() {
         return flagUrl;
     }
@@ -27,6 +22,6 @@ public class Player {
 
     @Override
     public String toString() {
-        return name + " " + ", " + team;
+        return name + ", " + team;
     }
 }
