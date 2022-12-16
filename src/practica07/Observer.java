@@ -8,18 +8,16 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 public class Observer {
-    private GUI gui;
     private JSONObject obj;
-    private final ArrayList<Player> players;
+    private ArrayList<Player> players;
     private Ranking ranking;
 
-    public Observer(GUI gui) {
-        this.gui = gui;
-        this.players = getPlayersFromData();
+    public Observer() {
+        getPlayersFromData();
         createScorersRaking();
     }
 
-    public ArrayList<Player> getPlayersFromData() {
+    public void getPlayersFromData() {
         ArrayList<Player> playersList = new ArrayList<>();
         DataFetcher dataFetcher = new DataFetcher();
         dataFetcher.setUrl("https://api.football-data.org/v4/competitions/WC/scorers?season=2022");
@@ -34,7 +32,7 @@ public class Observer {
             Player player = new Player(playerName, teamName, teamUrl, goals);
             playersList.add(player);
         }
-        return playersList;
+        this.players = playersList;
     }
 
     public JPanel getRanking() throws MalformedURLException {
@@ -42,6 +40,10 @@ public class Observer {
     }
 
     public void createScorersRaking() {
-        this.ranking = new ScorersRaking(this.players);
+        this.ranking = new ScorersRaking(players);
+    }
+
+    public void update() {
+        this.ranking.update();
     }
 }

@@ -16,7 +16,6 @@ public class ScorersRaking extends Ranking {
 
     @Override
     public void update() {
-
     }
 
     @Override
