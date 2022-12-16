@@ -1,7 +1,10 @@
 package practica07;
 
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -19,7 +22,7 @@ public class ScorersRaking extends Ranking {
     }
 
     @Override
-    public JPanel writeRanking() throws MalformedURLException {
+    public JPanel writeRanking() throws IOException {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         JLabel title = new JLabel(title_);
@@ -29,7 +32,8 @@ public class ScorersRaking extends Ranking {
                     player.toString() + "<br>" +
                     player.getNumberOfGoals()
                     + "</body></html>");
-            URL url = new URL(player.getFlagUrl());
+            String stringUrl = player.getFlagUrl();
+            URL url = new URL(stringUrl);
             Image icon = new ImageIcon(url).getImage();
             icon = icon.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
             playerLabel.setIcon(new ImageIcon(icon));

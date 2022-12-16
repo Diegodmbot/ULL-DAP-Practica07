@@ -4,7 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.swing.*;
-import java.net.MalformedURLException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Observer {
@@ -35,7 +35,7 @@ public class Observer {
         this.players = playersList;
     }
 
-    public JPanel getRanking() throws MalformedURLException {
+    public JPanel getRanking() throws IOException {
         return ranking.writeRanking();
     }
 

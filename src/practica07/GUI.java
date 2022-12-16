@@ -1,5 +1,7 @@
 package practica07;
 
+import org.apache.batik.transcoder.TranscoderException;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,7 +16,7 @@ public class GUI {
     private JButton botonActualizar;
     private Observer observer;
 
-    public GUI() throws IOException {
+    public GUI() throws IOException, TranscoderException {
         frame = new JFrame();
         mainPanel = new JPanel(new GridBagLayout());
         infoLabel = new JLabel("Se muestran estadísticas de los jugadores del Mundial de 2022", SwingConstants.CENTER);
@@ -29,7 +31,7 @@ public class GUI {
                 observer.createScorersRaking();
                 try {
                     mainPanel.add(observer.getRanking(), mainPanelConstraints);
-                } catch (MalformedURLException ex) {
+                } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
             }
@@ -48,7 +50,7 @@ public class GUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, TranscoderException {
         GUI gui = new GUI();
     }
 }
